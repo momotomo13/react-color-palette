@@ -4,9 +4,10 @@ import "./Palette.css";
 
 
 export default class Palette extends Component {
+    
     render() {
-        const ColorBoxes = this.props.colors.map( color => {
-            return <ColorBox color={color.color} name={color.name}/>
+        const ColorBoxes = this.props.palette.colors[500].map( color => {
+            return <ColorBox color={color.hex} name={color.name}/>
         });
 
         return (
