@@ -34,13 +34,20 @@ const styles = {
 };
 
 class PaletteList extends Component {
+  //historyを使い個別のパレットページへ
+  goToPalette(id) {
+    this.props.history.push(`/palette/${id}`);
+  }
+
   render() {
     const { palettes, classes } = this.props;
 
     const paletteList = palettes.map(palette => (
-      <Link to={`palette/${palette.id}/`}>
-        <MiniPalette {...palette} />
-      </Link>
+      <MiniPalette
+        {...palette}
+        handleClick={() => this.goToPalette(palette.id)}
+        key={palette.id}
+      />
     ));
 
     return (
