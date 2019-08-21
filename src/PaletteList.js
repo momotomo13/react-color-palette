@@ -34,7 +34,7 @@ const styles = {
 };
 
 class PaletteList extends Component {
-  //historyを使い個別のパレットページへ
+  //historyを使い個別のpaletteへ
   goToPalette(id) {
     this.props.history.push(`/palette/${id}`);
   }
