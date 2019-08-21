@@ -11,7 +11,12 @@
     height: 50%;
 }
 
-.copy-button {
+.ColorBox.go-back {
+    background-color: #333;
+}
+
+.copy-button,
+.back-button {
     width: 100px;
     height: 30px;
     position: absolute;
@@ -29,7 +34,14 @@
     text-transform: uppercase;
     border: none;
     border-radius: 10px;
+}
+
+.copy-button {
     opacity: 0;
+}
+
+.back-button {
+    text-decoration: none;
 }
 
 /* colorbox全体をhover時にcopyボタン出現用 */
