@@ -21,7 +21,7 @@ export default class ColorBox extends Component {
 
   render() {
     // this.propsを省略
-    const { name, color } = this.props;
+    const { name, color, moreUrl } = this.props;
     const { copied } = this.state;
     return (
       // textに設定されてるものをclipboardに設定
@@ -42,7 +42,7 @@ export default class ColorBox extends Component {
             <button className="copy-button">Copy</button>
           </div>
           {/* transitionをつけた際にcopyアニメーションをstopするためにstopPropagation追加 */}
-          <Link to="/" onClick={e => e.stopPropagation()}>
+          <Link to={moreUrl} onClick={e => e.stopPropagation()}>
             <span className="see-more">MORE</span>
           </Link>
         </div>
