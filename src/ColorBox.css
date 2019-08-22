@@ -54,9 +54,17 @@
     position: absolute;
     left: 5px;
     bottom: 5px;
-    color: white;
+    color: black;
     letter-spacing: 1.4px;
     font-size: .7rem;
+}
+
+.light-text {
+    color: white;
+}
+
+.ColorBox .dark-text {
+    color: rgba(0, 0, 0, .6);
 }
 
 .see-more {
@@ -73,6 +81,7 @@
     line-height: 20px;
     text-transform: uppercase;
 }
+
 
 .copy-overlay {
     opacity: 0;
