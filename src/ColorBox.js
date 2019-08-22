@@ -61,6 +61,60 @@ const styles = {
     border: "none",
     borderRadius: "10px",
     opacity: 0
+  },
+  boxContent: {
+    position: "absolute",
+    left: "5px",
+    bottom: "5px",
+    color: "black",
+    letterSpacing: "1.4px",
+    fontSize: ".7rem"
+  },
+  copyOverlay: {
+    opacity: 0,
+    zIndex: 0,
+    width: "100%",
+    height: "100%",
+    transition: "transform 0.6s ease-in-out"
+  },
+  showOverlay: {
+    opacity: 1,
+    transform: "scale(50)",
+    zIndex: 10,
+    position: "absolute"
+  },
+  copyMsg: {
+    position: "fixed",
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "column",
+    fontSize: "2.6rem",
+    transform: "scale(0.1)",
+    opacity: 0,
+    color: "white",
+    "& h1": {
+      fontWeight: "bold",
+      textShadow: "2px 2px 40px rgba(0, 0, 0, .1)",
+      width: "100%",
+      textAlign: "center",
+      marginBottom: 0,
+      padding: "1rem"
+    },
+    "& p": {
+      fontSize: ".9rem"
+    }
+  },
+  showMessege: {
+    opacity: 1,
+    transform: "scale(1)",
+    zIndex: 20,
+    transition: "all 0.2s ease-in-out",
+    transitionDelay: "0.3s"
   }
 };
 
@@ -91,14 +145,17 @@ class ColorBox extends Component {
         <div style={{ background: color }} className={classes.ColorBox}>
           <div
             style={{ background: color }}
-            className={`copy-overlay ${copied && "show"}`}
+            className={`${classes.copyOverlay} ${copied &&
+              classes.showOverlay}`}
           />
-          <div className={`copy-msg ${copied && "show"}`}>
-            <h1 className={classes.copyText}>Copied</h1>
+          <div
+            className={`${classes.copyMsg} ${copied && classes.showMessege}`}
+          >
+            <h1>Copied</h1>
             <p className={classes.copyText}>{color}</p>
           </div>
-          <div className="copy-container">
-            <div className="box-content">
+          <div>
+            <div className={classes.boxContent}>
               <span className={classes.colorName}>{name}</span>
             </div>
             <button className={classes.copyButton}>Copy</button>
