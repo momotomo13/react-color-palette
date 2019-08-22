@@ -39,7 +39,7 @@ export default class SingleColorPalette extends Component {
         key={color.name}
         name={color.name}
         color={color[this.state.format]}
-        showLink={false}
+        showingFullPalette={false}
       />
     ));
     return (
