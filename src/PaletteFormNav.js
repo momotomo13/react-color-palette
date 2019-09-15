@@ -23,7 +23,8 @@ const styles = theme => ({
     }),
     flexDirection: "row",
     justifyContent: "space-between",
-    height: "64px"
+    height: "64px",
+    alignItems: "center"
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -37,13 +38,26 @@ const styles = theme => ({
     marginLeft: 12,
     marginRight: 20
   },
-  navBtn: {}
+  navBtn: {
+    marginRight: "1rem"
+  },
+  button: {
+    margin: "0 0.5rem"
+  },
+  link: {
+    textDecoration: "none"
+  }
 });
 
 class PaletteFormNav extends Component {
   constructor(props) {
     super(props);
-    this.state = { newPaletteName: "" };
+    this.state = { newPaletteName: "", formShowing: false };
+    this.showForm = this.showForm.bind(this);
+  }
+
+  showForm() {
+    this.setState({ formShowing: true });
   }
 
   render() {
@@ -72,17 +86,31 @@ class PaletteFormNav extends Component {
             </Typography>
           </Toolbar>
           <div classNema={classes.navBtn}>
-            <PaletteMetaForm
-              palette={this.props.palette}
-              handleSubmit={this.props.handleSubmit}
-            />
-            <Link to="/">
-              <Button variant="contained" color="secondary">
-                go back
+            <Link to="/" className={classes.link}>
+              <Button
+                variant="contained"
+                color="secondary"
+                className={classes.button}
+              >
+                戻る
               </Button>
             </Link>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={this.showForm}
+              className={classes.button}
+            >
+              保存
+            </Button>
           </div>
         </AppBar>
+        {this.state.formShowing && (
+          <PaletteMetaForm
+            palette={this.props.palette}
+            handleSubmit={this.props.handleSubmit}
+          />
+        )}
       </div>
     );
   }

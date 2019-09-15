@@ -11,7 +11,7 @@ class PaletteMetaForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false,
+      open: true,
       newPaletteName: ""
     };
     this.handleChange = this.handleChange.bind(this);
@@ -42,53 +42,45 @@ class PaletteMetaForm extends Component {
   render() {
     return (
       <div>
-        <Button
-          variant="outlined"
-          color="primary"
-          onClick={this.handleClickOpen}
-        >
-          Open form dialog
-        </Button>
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              To subscribe to this website, please enter your email address
-              here. We will send updates occasionally.
-            </DialogContentText>
-            <ValidatorForm
-              onSubmit={() =>
-                this.props.handleSubmit(this.state.newPaletteName)
-              }
-            >
+          <DialogTitle id="form-dialog-title">
+            パレットに名前をつけよう
+          </DialogTitle>
+          <ValidatorForm
+            onSubmit={() => this.props.handleSubmit(this.state.newPaletteName)}
+          >
+            <DialogContent>
+              <DialogContentText>
+                あなたのパレットに名前をつけてください。
+              </DialogContentText>
+
               <TextValidator
-                label="Palette Name"
+                label="パレット名"
                 value={this.state.newPaletteName}
                 name="newPaletteName"
                 onChange={this.handleChange}
+                fullWidth
+                margin="normal"
                 validators={["required", "isPaletteNameUnique"]}
                 errorMessages={[
                   "Palette nameを入力してね",
                   "もうすでにその名前は使われています"
                 ]}
               />
-              <Button variant="contained" color="primary" type="submit">
-                Save Palette
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={this.handleClose} color="primary">
+                戻る
               </Button>
-            </ValidatorForm>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
-              Cancel
-            </Button>
-            <Button onClick={this.handleClose} color="primary">
-              Subscribe
-            </Button>
-          </DialogActions>
+              <Button variant="contained" color="primary" type="submit">
+                パレットを保存
+              </Button>
+            </DialogActions>
+          </ValidatorForm>
         </Dialog>
       </div>
     );
