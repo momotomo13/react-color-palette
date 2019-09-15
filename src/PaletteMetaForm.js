@@ -6,6 +6,8 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import "emoji-mart/css/emoji-mart.css";
+import { Picker } from "emoji-mart";
 
 class PaletteMetaForm extends Component {
   constructor(props) {
@@ -46,6 +48,7 @@ class PaletteMetaForm extends Component {
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
+          onClose={this.props.hideForm}
         >
           <DialogTitle id="form-dialog-title">
             パレットに名前をつけよう
@@ -54,6 +57,7 @@ class PaletteMetaForm extends Component {
             onSubmit={() => this.props.handleSubmit(this.state.newPaletteName)}
           >
             <DialogContent>
+              <Picker />
               <DialogContentText>
                 あなたのパレットに名前をつけてください。
               </DialogContentText>
@@ -73,7 +77,7 @@ class PaletteMetaForm extends Component {
               />
             </DialogContent>
             <DialogActions>
-              <Button onClick={this.handleClose} color="primary">
+              <Button onClick={this.props.hideForm} color="primary">
                 戻る
               </Button>
               <Button variant="contained" color="primary" type="submit">
