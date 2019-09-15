@@ -13,10 +13,12 @@ class PaletteMetaForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: true,
+      stage: "form",
       newPaletteName: ""
     };
     this.handleChange = this.handleChange.bind(this);
+    this.showEmojiPicker = this.showEmojiPicker.bind(this);
+    this.savePalette = this.savePalette.bind(this);
   }
 
   componentDidMount() {
@@ -33,6 +35,17 @@ class PaletteMetaForm extends Component {
     });
   }
 
+  showEmojiPicker() {
+    this.setState({ stage: "emoji" });
+  }
+
+  savePalette(emoji) {
+    const newPalette = {
+      paletteName: this.state.newPaletteName,
+      emoji: emoji.native
+    };
+    this.props.handleSubmit(newPalette);
+  }
   handleClickOpen = () => {
     this.setState({ open: true });
   };
@@ -45,7 +58,14 @@ class PaletteMetaForm extends Component {
     return (
       <div>
         <Dialog
-          open={this.state.open}
+          open={this.state.stage === "emoji"}
+          onClose={this.props.hideForm}
+        >
+          <DialogTitle id="form-dialog-title">絵文字を選んでね</DialogTitle>
+          <Picker title="絵文字を選んでね" onSelect={this.savePalette} />
+        </Dialog>
+        <Dialog
+          open={this.state.stage === "form"}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
           onClose={this.props.hideForm}
@@ -53,11 +73,8 @@ class PaletteMetaForm extends Component {
           <DialogTitle id="form-dialog-title">
             パレットに名前をつけよう
           </DialogTitle>
-          <ValidatorForm
-            onSubmit={() => this.props.handleSubmit(this.state.newPaletteName)}
-          >
+          <ValidatorForm onSubmit={this.showEmojiPicker}>
             <DialogContent>
-              <Picker />
               <DialogContentText>
                 あなたのパレットに名前をつけてください。
               </DialogContentText>

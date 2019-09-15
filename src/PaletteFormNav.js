@@ -89,7 +89,7 @@ class PaletteFormNav extends Component {
               Create A Palette
             </Typography>
           </Toolbar>
-          <div classNema={classes.navBtn}>
+          <div className={classes.navBtn}>
             <Link to="/" className={classes.link}>
               <Button
                 variant="contained"
