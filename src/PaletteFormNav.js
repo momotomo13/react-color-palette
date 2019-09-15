@@ -8,8 +8,8 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import Button from "@material-ui/core/Button";
-import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { Link } from "react-router-dom";
+import PaletteMetaForm from "./PaletteMetaForm";
 
 const drawerWidth = 400;
 const styles = theme => ({
@@ -44,22 +44,6 @@ class PaletteFormNav extends Component {
   constructor(props) {
     super(props);
     this.state = { newPaletteName: "" };
-
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  componentDidMount() {
-    ValidatorForm.addValidationRule("isPaletteNameUnique", value =>
-      this.props.palette.every(
-        ({ paletteName }) => paletteName.toLowerCase() !== value.toLowerCase()
-      )
-    );
-  }
-
-  handleChange(evt) {
-    this.setState({
-      [evt.target.name]: evt.target.value
-    });
   }
 
   render() {
@@ -88,26 +72,10 @@ class PaletteFormNav extends Component {
             </Typography>
           </Toolbar>
           <div classNema={classes.navBtn}>
-            <ValidatorForm
-              onSubmit={() =>
-                this.props.handleSubmit(this.state.newPaletteName)
-              }
-            >
-              <TextValidator
-                label="Palette Name"
-                value={this.state.newPaletteName}
-                name="newPaletteName"
-                onChange={this.handleChange}
-                validators={["required", "isPaletteNameUnique"]}
-                errorMessages={[
-                  "Palette nameを入力してね",
-                  "もうすでにその名前は使われています"
-                ]}
-              />
-              <Button variant="contained" color="primary" type="submit">
-                Save Palette
-              </Button>
-            </ValidatorForm>
+            <PaletteMetaForm
+              palette={this.props.palette}
+              handleSubmit={this.props.handleSubmit}
+            />
             <Link to="/">
               <Button variant="contained" color="secondary">
                 go back
