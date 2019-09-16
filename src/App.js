@@ -10,9 +10,11 @@ import NewPaletteForm from "./NewPaletteForm";
 export default class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { palette: seedColors };
+    const savedPalettes = JSON.parse(window.localStorage.getItem("palettes"));
+    this.state = { palette: savedPalettes || seedColors };
     this.savePalette = this.savePalette.bind(this);
     this.findPalette = this.findPalette.bind(this);
+    this.syncLocalStorage = this.syncLocalStorage.bind(this);
   }
 
   //seedColorからidがmatchするパレットを返す
@@ -23,7 +25,15 @@ export default class App extends Component {
   }
 
   savePalette(newPalette) {
-    this.setState({ palette: [...this.state.palette, newPalette] });
+    this.setState(
+      { palette: [...this.state.palette, newPalette] },
+      this.syncLocalStorage
+    );
+  }
+
+  syncLocalStorage() {
+    //local storageにパレットを保存
+    window.localStorage.setItem("palettes", JSON.stringify(this.state.palette));
   }
 
   render() {
