@@ -1,12 +1,15 @@
 import sizes from "./sizes";
+import bg from "./bg.svg";
 
 export default {
   root: {
-    backgroundColor: "#333",
     height: "100vh",
     display: "flex",
     alignItems: "flex-start",
-    justifyContent: "center"
+    justifyContent: "center",
+    backgroundColor: "#2957cc",
+    backgroundImage: `url(${bg})`,
+    overflow: "scroll"
   },
   container: {
     width: "50%",
@@ -42,7 +45,8 @@ export default {
       gridGap: "1rem"
     },
     [sizes.down("xs")]: {
-      gridTemplateColumns: "repeat(1, 100%)"
+      gridTemplateColumns: "repeat(1, 100%)",
+      gridGap: "1.4rem"
     }
   }
 };
